@@ -1,0 +1,1 @@
+Modify the Makefile to enable seamless compilation of Lua on Windows using mingw32-make. Simply copy these files to the Lua project directory and run make.

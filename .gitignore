@@ -1,0 +1,8 @@
+/doc
+/install
+/src
+/build/*.o
+/build/*.a
+/build/*.exe
+/build/*.h
+/build/*.hpp
