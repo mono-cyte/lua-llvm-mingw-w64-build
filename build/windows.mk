@@ -1,5 +1,4 @@
 # windows全静态编译
-SHELL := cmd
 
 CC := x86_64-w64-mingw32-clang
 
@@ -7,7 +6,7 @@ AR := x86_64-w64-mingw32-llvm-ar rcs
 
 RANLIB := x86_64-w64-mingw32-llvm-ranlib
 
-SRC := ..\src
+SRC := ../src
 
 CFLAGS := -O2 -Wall -Wextra -DLUA_COMPAT_5_3
 
@@ -15,11 +14,11 @@ LDFLAGS := -static
 
 LUA_A :=	liblua.a
 
-INC := $(SRC)\lua.h $(SRC)\luaconf.h $(SRC)\lualib.h $(SRC)\lauxlib.h $(SRC)\lua.hpp
+INC := $(SRC)/lua.h $(SRC)/luaconf.h $(SRC)/lualib.h $(SRC)/lauxlib.h $(SRC)/lua.hpp
 
 CORE_O :=	lapi.o lcode.o lctype.o ldebug.o ldo.o ldump.o lfunc.o lgc.o llex.o lmem.o lobject.o lopcodes.o lparser.o lstate.o lstring.o ltable.o ltm.o lundump.o lvm.o lzio.o
 LIB_O :=	lauxlib.o lbaselib.o lcorolib.o ldblib.o liolib.o lmathlib.o loadlib.o loslib.o lstrlib.o ltablib.o lutf8lib.o linit.o
-BASE_O := $(CORE_O) $(LIB_O)
+BASE_O := 	$(CORE_O) $(LIB_O)
 
 LUA_T :=	lua.exe
 LUA_O :=	lua.o
@@ -36,7 +35,7 @@ ALL_A := $(LUA_A)
 all: $(ALL_T) include
 
 include: $(INC)
-	$(foreach file, $(INC), copy $(file) .\ &&) echo > nul
+	cp $^ ./
 
 $(LUA_A): $(BASE_O)
 	$(AR) $@ $(BASE_O)
@@ -174,4 +173,4 @@ lzio.o: $(SRC)/lzio.c $(SRC)/lprefix.h $(SRC)/lua.h $(SRC)/luaconf.h $(SRC)/llim
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@del *.o *.a *.exe *.h *.hpp
+	@rm *.o *.a *.exe *.h *.hpp
